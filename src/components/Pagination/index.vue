@@ -1,5 +1,6 @@
 <template>
-  <div v-show="total / size > 0" class="content__footer">
+<!-- v-show="total / size > 0" -->
+  <div  class="content__footer">
     <el-pagination :current-page="page" :page-sizes="GLOBAL.pageSizes" :page-size="size" :total="total" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </div>
 </template>

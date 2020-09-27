@@ -147,7 +147,7 @@ html::-webkit-scrollbar-track body::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-::-webkit-scrollbar {
+.app-container::-webkit-scrollbar {
   display: none;
   /* Chrome Safari */
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="app-container">
     home
     <input type="text">
   </div>
