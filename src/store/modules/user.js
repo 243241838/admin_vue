@@ -7,7 +7,7 @@ function formatRouter(routers, level = 1) {
     let data = {
       path: item.path,
       name: item.path.replace(/\//g, "") + parseInt(Math.random() * 100000),
-      component: () => import("@/layout"),
+      component: () => import("@/views/layout"),
       title: item.meta.title,
       icon: item.meta.icon,
       meta: {

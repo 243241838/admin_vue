@@ -27,10 +27,7 @@
   </div>
 </template>
 <script >
-import tabs from "@/components/layout/tabs";
-import cHead from "@/components/layout/head";
-import cAside from "@/components/layout/aside";
-import cMain from "@/components/layout/main";
+import { tabs, cHead, cAside, cMain } from "./mods";
 export default {
   name: "layout",
   components: {

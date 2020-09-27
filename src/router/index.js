@@ -31,7 +31,7 @@ const routes = [
   {
     path: "",
     name: "",
-    component: () => import("@/layout"),
+    component: () => import("@/views/layout"),
     children: [
       {
         path: "/welcome",

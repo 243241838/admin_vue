@@ -2,7 +2,7 @@
 const systemManage = {
   path: '/user',
   name: 'user',
-  component: () => import("@/layout"),
+  component: () => import("@/views/layout"),
   meta: { title: '系统管理', icon: 'el-icon-location' },
   children: [
     {

@@ -20,7 +20,6 @@ router.beforeEach((to, from, next) => {
         .then((routers) => {
           router.addRoutes(routers); // 动态添加可访问路由表
           router.addRoutes([{ path: "*", redirect: "/login" }]); // 当找不到时，跳转登录页面或者404
-          console.log("da");
           next({ ...to, replace: true }); // hack方法 确保addRoutes已完成 会重新进入beforeEach,set the replace: true so the navigation will not leave a history record
         })
         .catch((error) => {
