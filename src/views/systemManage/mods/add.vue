@@ -1,33 +1,30 @@
 <template>
   <div>
-    <!-- <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+    <el-dialog :title="title" :visible.sync="dialogVisible" width="30%" :close-on-click-modal="false" :before-close="handleClose">
       <el-form ref="ruleForm" :inline="false" :model="formData" :rules="rules" label-width="105px" class="demo-ruleForm">
         <el-row>
           <el-col :span="12">
             <el-form-item label="姓名" prop="name">
-              <el-input v-model="formData.name" placeholder="请输入"></el-input>
+              <el-input v-model="formData.name" placeholder="请输入" :readonly="!isEdit" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="地址" prop="address">
-              <el-select v-model="formData.address" placeholder="请选择" clearable>
-                <el-input v-model="formData.address" placeholder="请输入"></el-input>
-              </el-select>
+              <el-input v-model="formData.address" placeholder="请输入" :readonly="!isEdit" />
             </el-form-item>
           </el-col>
-
         </el-row>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" submitForm('ruleForm')>确 定</el-button>
+        <el-button size="small" @click="handleClose">取 消</el-button>
+        <el-button v-if="isEdit" :loading="loading" type="primary" size="small" @click="submitForm('ruleForm')">确 定</el-button>
       </span>
-    </el-dialog> -->
+    </el-dialog>
   </div>
 </template>
 
 <script>
-// import { getList } from "@/api/systemManage/list.js";
+import { add } from "@/api/systemManage/list.js";
 export default {
   components: {},
   props: {
@@ -48,22 +45,46 @@ export default {
   },
   data() {
     return {
-      loading: false
+      loading: false,
+      rules: {
+        name: [{ required: true, message: "请输入", trigger: "blur" }],
+        address: [{ required: true, message: "请输入", trigger: "blur" }]
+      }
     };
+  },
+  computed: {
+    isEdit() {
+      return this.title !== "查看";
+    }
   },
   created() {},
   mounted() {},
   methods: {
     submitForm(formName) {
-      // this.$refs[formName].validate(valid => {
-      //   if (valid) {
-      //     this.loading = true;
-        
-      //   } else {
-      //     console.log("error submit!!");
-      //     return false;
-      //   }
-      // });
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.loading = true;
+          add(this.params)
+            .then(res => {
+              this.$message({
+                message: res.data.msg,
+                type: "success"
+              });
+              this.handleClose(); // 关闭弹窗 清除验证
+              this.$emit("callBack"); // 刷新表格
+              setTimeout(() => {
+                this.loading = false;
+              }, 1500);
+            })
+            .catch(err => {
+              this.loading = false;
+              console.log(err);
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
     handleClose() {
       this.$refs["ruleForm"].clearValidate();
