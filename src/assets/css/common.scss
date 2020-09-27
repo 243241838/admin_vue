@@ -1,0 +1,32 @@
+//弹性盒
+.flex {
+  display: flex;
+}
+
+.flex_column {
+  flex-direction: column;
+}
+
+.item_flex {
+  flex: 1;
+}
+
+.flex_align {
+  align-items: center;
+}
+
+.justify_a {
+  justify-content: space-around;
+}
+
+.justify_b {
+  justify-content: space-between;
+}
+
+.justify_c {
+  justify-content: center;
+}
+
+.flex_right {
+  justify-content: flex-end;
+}
