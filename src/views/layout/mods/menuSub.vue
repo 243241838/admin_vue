@@ -3,8 +3,9 @@
     <template v-if="menuItem.children && menuItem.children.length> 0">
       <el-submenu :index="menuItem.title">
         <template slot="title">
+          <!-- {{ menuItem.title }} -->
           <i :class="menuItem.icon"></i>
-          <span>{{menuItem.title}}</span>
+          <span slot="title">{{menuItem.title}}</span>
         </template>
         <menu-sub v-for="item in menuItem.children" :key="item.menuName" :menuItem="item" :base-path="resolvePath(item.path)" />
       </el-submenu>

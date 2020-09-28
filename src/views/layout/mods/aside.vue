@@ -21,10 +21,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .el-aside {
-  width: 180px !important;
+  width: 200px !important;
   height: 100%;
+  overflow-x: hidden;
   background: #17233d;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
+}
+.el-aside::-webkit-scrollbar {
+  display: none;
 }
 </style>

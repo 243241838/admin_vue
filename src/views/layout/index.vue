@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="box">
+    <!-- <div class="box">
       <c-head />
       <el-container>
         <c-aside />
@@ -12,17 +12,19 @@
           <c-main />
         </div>
       </el-container>
-      <!-- <el-container>
-        <c-aside />
-        <el-container>
-          <c-head />
+    </div> -->
+    <el-container>
+      <c-aside />
+      <el-container style="flex-direction: column;">
+        <c-head />
+        <div class="main">
           <div class="tabs">
             <tabs />
           </div>
           <c-main />
-        </el-container>
-      </el-container> -->
-    </div>
+        </div>
+      </el-container>
+    </el-container>
 
   </div>
 </template>
@@ -46,9 +48,9 @@ export default {
 <style lang="scss" scoped>
 .el-container {
   width: 100%;
-  height: calc(100vh - 60px);
+  height: 100vh
 }
-.main {
-  width: calc(100vw - 180px);
-}
+// .main {
+//   width: calc(100vw - 200px);
+// }
 </style>

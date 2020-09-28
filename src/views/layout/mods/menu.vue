@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-menu :default-active="$route.path" unique-opened class="el-menu-vertical-demo" background-color="#17233d" text-color="#fff" active-text-color="#ffd04b">
+  <div class="menu">
+    <el-menu :default-active="$route.path" :collapse="false" unique-opened class="el-menu-vertical-demo" background-color="#17233d" text-color="#fff" active-text-color="#ffd04b">
       <menu-sub v-for="item in menus" :key="item.name" :menuItem="item" :base-path="item.path" />
     </el-menu>
   </div>
@@ -57,10 +57,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.el-menu {
-  width: 100%;
-}
-.el-submenu .el-menu-item {
-  min-width: 100px;
+/deep/.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 </style>
