@@ -1,0 +1,58 @@
+// 将设置放入此文件中以覆盖默认设置
+{
+  "files.associations": {
+    "*.vue": "vue",
+    "*.js": "javascriptreact"
+  },
+  "vsicons.presets.hideFolders": true,
+  "vetur.validation.template": false, //对v-fro不加加key的报错
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "window.zoomLevel": 0,
+  "vetur.format.options.tabSize": 2,
+  "typescript.check.tscVersion": false,
+  "editor.tokenColorCustomizationsExperimental": null,
+  "editor.renderIndentGuides": false,
+  "editor.tabCompletion": "on",
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "auto"
+    }
+  },
+  "git.autofetch": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "workbench.editorAssociations": [],
+  "editor.rulers": [],
+  // "prettier.singleQuote": true,
+  // "prettier.semi": false,
+  // "prettier.eslintIntegration": true,
+  // "prettier.printWidth": 10,
+  // "editor.formatOnSave": true,
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [
+  
+  ],
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "launch": {
+
+    
+  },
+  "files.autoSave": "off",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  }
+}
