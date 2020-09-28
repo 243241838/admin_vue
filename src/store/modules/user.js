@@ -38,6 +38,9 @@ const user = {
     // 设置菜单
     SETROUTERS: (state, { userInfo, routers }) => {
       state.userInfo = userInfo;
+      state.userInfo = {
+        name: "超级管理员",
+      };
       state.routers = routers;
       state.menus = [
         {

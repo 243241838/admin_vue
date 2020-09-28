@@ -1,14 +1,10 @@
 <template>
-  <div>
-
-    <div class="tabs">
-      <el-tabs v-model="editableTabsValue" type="card" @tab-click="handleClick">
-        <el-tab-pane v-for="(item, index) in visitedViews" :key="item.name" :label="item.title" :name="item.name">
-          <span slot="label">{{item.title}}<i v-if="!item.isClose" @click.stop="close(item, index)" class="el-icon-circle-close close"></i></span>
-        </el-tab-pane>
-      </el-tabs>
-    </div>
-
+  <div class="tabs">
+    <el-tabs v-model="editableTabsValue" type="card" @tab-click="handleClick">
+      <el-tab-pane v-for="(item, index) in visitedViews" :key="item.name" :label="item.title" :name="item.name">
+        <span slot="label">{{item.title}}<i v-if="!item.isClose" @click.stop="close(item, index)" class="el-icon-circle-close close"></i></span>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 <script >

@@ -1,6 +1,6 @@
 <template>
-  <div class="menu">
-    <el-menu :default-active="$route.path" :collapse="false" unique-opened class="el-menu-vertical-demo" background-color="#17233d" text-color="#fff" active-text-color="#ffd04b">
+  <div>
+    <el-menu :default-active="$route.path" :collapse="isCollapse" unique-opened class="el-menu-vertical-demo" background-color="#17233d" text-color="#fff" active-text-color="#ffd04b">
       <menu-sub v-for="item in menus" :key="item.name" :menuItem="item" :base-path="item.path" />
     </el-menu>
   </div>
@@ -50,7 +50,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["menus"])
+    ...mapGetters(["menus", "isCollapse"])
   },
   created() {},
   methods: {}
@@ -60,5 +60,16 @@ export default {
 /deep/.el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+/deep/.el-menu--collapse .el-menu-item span,
+/deep/.el-menu--collapse .el-submenu .el-submenu__title span {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  display: inline-block;
+}
+/deep/ .el-menu {
+  width: 100%;
 }
 </style>

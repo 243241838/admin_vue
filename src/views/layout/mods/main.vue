@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <el-main>
-      <keep-alive :include="cachedViews">
-        <!-- 将缓存name为test-keep-alive的组件 -->
-        <!-- 已有路由 -->
-        <router-view />
-        <!-- 动态配置的 -->
-        <components :is="componentName"></components>
-      </keep-alive>
-    </el-main>
-  </div>
+  <el-main class="item_flex">
+    <keep-alive :include="cachedViews">
+      <!-- 将缓存name为test-keep-alive的组件 -->
+      <!-- 已有路由 -->
+      <router-view />
+      <!-- 动态配置的 -->
+      <components :is="componentName"></components>
+    </keep-alive>
+  </el-main>
 </template>
 <script >
 import Vue from "vue";
@@ -57,7 +55,10 @@ export default {
         errors => {
           this.componentName = Error;
           this.$message.error(
-            "模块地址加载失败,地址：" + this.$route.path + "，具体错误：" + errors
+            "模块地址加载失败,地址：" +
+              this.$route.path +
+              "，具体错误：" +
+              errors
           );
           console.error(errors);
         }
@@ -72,7 +73,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .el-main {
-  height: calc(100vh - 126px);
   background-color: #fff;
   padding: 10px;
   margin: 10px;
