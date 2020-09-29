@@ -20,7 +20,7 @@
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click="logOut">退出</el-dropdown-item>
+              <el-dropdown-item @click.native="logOut">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </li>

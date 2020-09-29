@@ -8,6 +8,7 @@ import App from "./App.vue";
 import store from "./store";
 import router from "./router";
 import Cookies from "js-cookie";
+import echarts from 'echarts';
 import Pagination from '@/components/Pagination' // 分页
 Vue.component('Pagination', Pagination) // 全局注册分页组件
 Object.keys(filters).forEach((key) => {
@@ -16,6 +17,7 @@ Object.keys(filters).forEach((key) => {
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 Vue.prototype.$Cookies = Cookies;
+Vue.prototype.$echarts = echarts;
 let Global = {
   pageSize: 20,
   pageSizes: [20, 30, 50]

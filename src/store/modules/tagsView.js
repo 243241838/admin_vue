@@ -2,12 +2,12 @@ const user = {
   state: {
     visitedViews: [
       // tabs显示数据
-      {
-        path: "/welcome",
-        name: "welcome",
-        isClose: true,
-        title: "welcome",
-      },
+      // {
+      //   path: "/welcome",
+      //   name: "welcome",
+      //   isClose: true,
+      //   title: "welcome",
+      // },
     ],
     cachedViews: [], // 页面缓存
   },

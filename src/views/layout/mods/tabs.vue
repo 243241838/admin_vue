@@ -19,14 +19,14 @@ export default {
   watch: {
     $route: {
       handler: function() {
-        let data = this.$route
+        let data = this.$route;
         this.editableTabsValue = data.path;
         this.$store.dispatch("addView", {
           name: data.name,
           path: data.path,
           meta: data.meta
         });
-      },
+      }
       // immediate: true // 果为true 代表如果在 wacth 里声明了之后，就会立即先去执行里面的handler方法 初始化就执行一次
     }
   },
@@ -34,7 +34,15 @@ export default {
     ...mapGetters(["visitedViews", "cachedViews"])
   },
   created() {
-    this.editableTabsValue = this.$route.path
+    // 默认
+    this.editableTabsValue = this.$route.path;
+    let data = this.$route;
+    this.$store.dispatch("addView", {
+      name: data.name,
+      path: data.path,
+      isClose: true,
+      meta: data.meta
+    });
   },
   methods: {
     handleClick(tab, event) {
