@@ -1,6 +1,7 @@
 const user = {
   state: {
-    visitedViews: [ // tabs显示数据
+    visitedViews: [
+      // tabs显示数据
       {
         path: "/welcome",
         name: "welcome",
@@ -8,9 +9,12 @@ const user = {
         title: "welcome",
       },
     ],
-    cachedViews: [] // 页面缓存
+    cachedViews: [], // 页面缓存
   },
   mutations: {
+    INITVISITEDVIEW: (state, view) => {
+      state.visitedViews = view;
+    },
     // 添加显示数据
     ADD_VISITED_VIEW: (state, view) => {
       if (state.visitedViews.some((v) => v.path === view.path)) return;
@@ -46,6 +50,9 @@ const user = {
     },
   },
   actions: {
+    initVisitedView({ commit }, view) {
+      commit("INITVISITEDVIEW", view);
+    },
     addView({ dispatch }, view) {
       dispatch("addVisitedView", view);
       dispatch("addCachedView", view);

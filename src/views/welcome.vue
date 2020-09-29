@@ -8,9 +8,7 @@
 <script>
 export default {
   name: "welcome",
-  components: {
-    // HelloWorld
-  },
+  components: {},
   created() {}
 };
 </script>

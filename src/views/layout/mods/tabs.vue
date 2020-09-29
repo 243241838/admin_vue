@@ -1,7 +1,7 @@
 <template>
   <div class="tabs">
     <el-tabs v-model="editableTabsValue" type="card" @tab-click="handleClick">
-      <el-tab-pane v-for="(item, index) in visitedViews" :key="item.name" :label="item.title" :name="item.name">
+      <el-tab-pane v-for="(item, index) in visitedViews" :key="item.name" :label="item.title" :name="item.path">
         <span slot="label">{{item.title}}<i v-if="!item.isClose" @click.stop="close(item, index)" class="el-icon-circle-close close"></i></span>
       </el-tab-pane>
     </el-tabs>
@@ -19,16 +19,23 @@ export default {
   watch: {
     $route: {
       handler: function() {
-        this.editableTabsValue = this.$route.name;
-        this.$store.dispatch("addView", this.$route);
+        let data = this.$route
+        this.editableTabsValue = data.path;
+        this.$store.dispatch("addView", {
+          name: data.name,
+          path: data.path,
+          meta: data.meta
+        });
       },
-      immediate: true // 果为true 代表如果在 wacth 里声明了之后，就会立即先去执行里面的handler方法 初始化就执行一次
+      // immediate: true // 果为true 代表如果在 wacth 里声明了之后，就会立即先去执行里面的handler方法 初始化就执行一次
     }
   },
   computed: {
     ...mapGetters(["visitedViews", "cachedViews"])
   },
-  created() {},
+  created() {
+    this.editableTabsValue = this.$route.path
+  },
   methods: {
     handleClick(tab, event) {
       let index = tab.index;
