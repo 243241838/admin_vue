@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-dialog :title="title" :visible.sync="dialogVisible" width="30%" :close-on-click-modal="false" :before-close="handleClose">
-      <el-form ref="ruleForm" :inline="false" :model="formData" :rules="rules" label-width="105px" class="demo-ruleForm">
+    <Dialog :title="title" :dialog-visible.sync="dialogVisible" :width="'30%'" :loading="loading" :isEdit="isEdit" @handleClose="handleClose" @submitForm="submitForm">
+      <el-form ref="formName" :inline="false" :model="formData" :rules="rules" label-width="105px" class="demo-ruleForm">
         <el-row>
           <el-col :span="12">
             <el-form-item label="姓名" prop="name">
@@ -15,16 +15,13 @@
           </el-col>
         </el-row>
       </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button size="small" @click="handleClose">取 消</el-button>
-        <el-button v-if="isEdit" :loading="loading" type="primary" size="small" @click="submitForm('ruleForm')">确 定</el-button>
-      </span>
-    </el-dialog>
+    </Dialog>
   </div>
 </template>
 
 <script>
 import { add } from "@/api/systemManage/list.js";
+
 export default {
   components: {},
   props: {
@@ -60,11 +57,11 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+    submitForm() {
+      this.$refs["formName"].validate(valid => {
         if (valid) {
           this.loading = true;
-          add(this.params)
+          add(this.formData)
             .then(res => {
               this.$message({
                 message: res.data.msg,
@@ -81,13 +78,12 @@ export default {
               console.log(err);
             });
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
     },
     handleClose() {
-      this.$refs["ruleForm"].clearValidate();
+      this.$refs["formName"].clearValidate();
       this.$emit("update:dialogVisible", false);
     }
   }

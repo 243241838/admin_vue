@@ -18,27 +18,30 @@
     <el-button-group style="padding-bottom: 5px">
       <el-button @click="edit()" type="primary" size="small" icon="el-icon-plus">添加</el-button>
     </el-button-group>
-    <el-table :data="tableData" v-loading="loading" border highlight-current-row stripe fit class="item_flex" height="100%">
-      <el-table-column type="index" label="序号" align="center" width="80" />
-      <el-table-column prop="date" label="日期" align="center" width="180" />
-      <el-table-column prop="name" label="姓名" align="center" width="180" />
-      <el-table-column prop="address" label="地址" align="center" />
-      <el-table-column fixed="right" label="操作" align="center" width="200">
+    <C-table class="item_flex" :tableParams="tableParams" :tableData="tableData" :loading="loading" :height="'100%'" :multipleSelection.sync="multipleSelection" :sort.sync="params.sort" :order.sync="params.order" @callBack="val=> getList(val)">
+      <!-- 特殊需要过滤的 -->
+      <el-table-column slot="status" label="转态" align="center" prop="status" width="200">
+        <template slot-scope="scope">
+          <span v-for="(item, index) in status" :key="index" v-show="scope.row.status == item.value" v-text="item.name"></span>
+        </template>
+      </el-table-column>
+      <!-- 操作 -->
+      <el-table-column slot="operation" fixed="right" label="操作" align="center" width="200">
         <template slot-scope="scope">
           <el-button @click="edit(scope.row)" type="text" size="small">查看</el-button>
           <el-button @click="edit(scope.row, 1)" type="text" size="small">编辑</el-button>
           <el-button @click="deleData(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
-    </el-table>
-    <Pagination :page.sync="params.pageIndex" :size.sync="params.pageSize" :total="total" @getData="getList()" />
+    </C-table>
+    <pagination :page.sync="params.pageIndex" :size.sync="params.pageSize" :total="total" @getData="getList()" />
     <add :title="title" :form-data="formData" :dialog-visible.sync="dialogVisible" @callBack="getList()" />
   </div>
 </template>
 
 <script>
 import { getList } from "@/api/systemManage/list.js";
-import { add } from "./mods";
+import add from "./mods/add";
 export default {
   components: {
     add
@@ -50,34 +53,54 @@ export default {
         pageIndex: 1,
         pageSize: this.GLOBAL.pageSize,
         user: "",
-        region: ""
+        region: "",
+        sort: "",
+        order: ""
       },
       total: 100,
+      tableParams: [
+        { label: "复选框", params: "", width: "80", type: "selection" },
+        { label: "序号", params: "", width: "80", type: "index" },
+        { label: "日期", params: "date", width: "120", sortable: true },
+        { label: "姓名", params: "name", width: "120" },
+        { label: "地址", params: "address", width: "" },
+        { label: "状态", params: "status", width: 200, slotName: "status" }
+      ],
+      multipleSelection: [],
       tableData: [
         {
           date: "2016-05-02",
           name: "王小虎",
           id: 1,
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "上海市普陀区金沙江路 1518 弄",
+          status: 1
         },
         {
           date: "2016-05-04",
           name: "王小虎",
           id: 2,
-          address: "上海市普陀区金沙江路 1517 弄"
+          address: "上海市普陀区金沙江路 1517 弄",
+          status: 2
         },
         {
           date: "2016-05-01",
           name: "王小虎",
           id: 3,
-          address: "上海市普陀区金沙江路 1519 弄"
+          address: "上海市普陀区金沙江路 1519 弄",
+          status: 3
         },
         {
           date: "2016-05-03",
           name: "王小虎",
           id: 4,
-          address: "上海市普陀区金沙江路 1516 弄"
+          address: "上海市普陀区金沙江路 1516 弄",
+          status: 1
         }
+      ],
+      status: [
+        { name: "成功", value: 1 },
+        { name: "失败", value: 1 },
+        { name: "暂停", value: 1 }
       ],
       title: "",
       dialogVisible: false,
@@ -93,19 +116,18 @@ export default {
   },
   methods: {
     getList(status) {
+      console.log(this.params);
       if (status) {
         this.params.pageIndex = 1;
       }
       getList(this.params)
         .then(res => {
-          // 这里保证都是成功 200
           let data = res.data ? res.data : [];
           this.tableData = data.list ? data.list : [];
           this.total = data.total;
           this.loading = false;
         })
         .catch(err => {
-          // 报错或者 后端提示不是200
           this.loading = false;
           console.log(err);
         });

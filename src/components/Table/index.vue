@@ -1,0 +1,99 @@
+<template>
+  <div>
+    <el-table :data="tableData" v-loading="loading" border highlight-current-row stripe fit @selection-change="handleSelectionChange" @sort-change="sortChange" :height="height">
+      <template v-for="item in tableParams">
+        <!-- 需要特殊过滤的 -->
+        <template v-if="item.slotName">
+          <slot :name="item.slotName"></slot>
+        </template>
+        <!-- 没有排序的 -->
+        <el-table-column v-else-if="!item.sortable" :key="item.label" :prop="item.params" :type="item.type" :label="item.label" align="center" :width="item.width" />
+        <el-table-column v-else :key="item.label" :prop="item.params" :type="item.type" :label="item.label" sortable="custom" align="center" :width="item.width" />
+      </template>
+      <slot name="operation"></slot>
+    </el-table>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    // tableParams 数据介绍
+    // let tableParams = [
+    //   {
+    //     label: '',
+    //     params: '', // selection | index 可为空或不传
+    //     width: '', // 可选 不必传
+    //     type: '',  // selection | index 可选 不必传
+    //     sortable: '',  // true 或false 可选 不必传
+    //     slotName: '' // 具名插槽 用于数据过滤 不必传
+    //   }
+    // ]
+    tableParams: {
+      type: Array,
+      default: () => {
+        return;
+      }
+    },
+    tableData: {
+      // 表格数据
+      type: Array,
+      default: () => {
+        return [];
+      }
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    height: {
+      type: String,
+      default: ''
+    },
+    multipleSelection: {
+      // 多选 可不传
+      type: Array,
+      default: () => []
+    },
+    // 以下用不到， 父页面就不需要设置
+    sort: {
+      // 排序的方式
+      type: String,
+      default: ""
+    },
+    order: {
+      // 排序的字段
+      type: String,
+      default: ""
+    }
+  },
+  data() {
+    return {};
+  },
+  mounted() {},
+  methods: {
+    handleSelectionChange(val) {
+      // 多选赋值
+      this.$emit("update:multipleSelection", val);
+    },
+    sortChange(value) {
+      // 排序
+      let sort = value.order === "ascending" ? "ASC" : "DESC";
+      if (value.order) {
+        this.$emit("update:sort", sort);
+        this.$emit("update:order", value.prop);
+      } else {
+        this.$emit("update:sort", "");
+        this.$emit("update:order", "");
+      }
+      this.$emit("callBack", 1); // 重新请求
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.content__footer {
+  padding: 10px 0px;
+  text-align: right;
+}
+</style>
