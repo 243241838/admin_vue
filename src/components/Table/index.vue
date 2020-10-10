@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <el-table :data="tableData" v-loading="loading" border highlight-current-row stripe fit @selection-change="handleSelectionChange" @sort-change="sortChange" :height="height">
-      <template v-for="item in tableParams">
-        <!-- 需要特殊过滤的 -->
-        <template v-if="item.slotName">
-          <slot :name="item.slotName"></slot>
-        </template>
-        <!-- 没有排序的 -->
-        <el-table-column v-else-if="!item.sortable" :key="item.label" :prop="item.params" :type="item.type" :label="item.label" align="center" :width="item.width" />
-        <el-table-column v-else :key="item.label" :prop="item.params" :type="item.type" :label="item.label" sortable="custom" align="center" :width="item.width" />
+  <el-table :data="tableData" v-loading="loading" border highlight-current-row stripe fit @selection-change="handleSelectionChange" @sort-change="sortChange" :height="height">
+    <template v-for="item in tableParams">
+      <!-- 需要特殊过滤的 -->
+      <template v-if="item.slotName">
+        <slot :name="item.slotName"></slot>
       </template>
-      <slot name="operation"></slot>
-    </el-table>
-  </div>
+      <!-- 没有排序的 -->
+      <el-table-column v-else-if="!item.sortable" :key="item.label" :prop="item.params" :type="item.type" :label="item.label" align="center" :width="item.width" />
+      <el-table-column v-else :key="item.label" :prop="item.params" :type="item.type" :label="item.label" sortable="custom" align="center" :width="item.width" />
+    </template>
+    <slot name="operation"></slot>
+  </el-table>
 </template>
 
 <script>
@@ -48,7 +46,7 @@ export default {
     },
     height: {
       type: String,
-      default: ''
+      default: ""
     },
     multipleSelection: {
       // 多选 可不传
