@@ -25,7 +25,6 @@ router.beforeEach((to, from, next) => {
         .catch((error) => {
           Cookies.remove("token");
           location.reload();
-          console.log(error);
         });
     } else {
       next();

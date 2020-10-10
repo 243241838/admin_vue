@@ -3,10 +3,10 @@ const user = {
     visitedViews: [
       // tabs显示数据
       // {
-      //   path: "/welcome",
-      //   name: "welcome",
+      //   path: "/home",
+      //   name: "home",
       //   isClose: true,
-      //   title: "welcome",
+      //   title: "首页",
       // },
     ],
     cachedViews: [], // 页面缓存

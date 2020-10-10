@@ -9,7 +9,7 @@ const systemManage = {
       path: 'list',
       name: 'list',
       meta: {
-        title: 'list',
+        title: '系统管理列表',
         component: 'systemManage/list'
       }
     }

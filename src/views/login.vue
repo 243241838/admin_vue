@@ -17,7 +17,7 @@ export default {
       this.$Cookies.set("token", "543");
       this.$router.push(
         {
-          path: "/welcome"
+          path: "/home"
         },
         () => {}
       ); // 动态路由 next({...to}) 所以这里要加一个回调，否则报错

@@ -1,7 +1,8 @@
 import { getPermission } from "@/api/user";
 import { asyncRouterMap } from "@/router";
 import router from "../../router";
-// 路由格式化处理 按后端返回修改具体字段即可
+// 路由格式化处理
+
 function formatRouter(routers, level = 1) {
   const array = routers.map((item) => {
     let data = {
@@ -30,7 +31,6 @@ function formatRouter(routers, level = 1) {
 const user = {
   state: {
     userInfo: {}, // 用户资料
-    // 路由和菜单基本通用一个数据
     routers: [], // 动态路由
     menus: [], // 菜单
   },
@@ -44,8 +44,8 @@ const user = {
       state.routers = routers;
       state.menus = [
         {
-          path: "/welcome",
-          name: "welcome",
+          path: "/home",
+          name: "home",
           title: "首页",
           icon: "el-icon-location",
           meta: {
@@ -64,7 +64,6 @@ const user = {
         // 获取菜单权限和按钮权限
         // getPermission()
         //   .then((res) => {
-        //     // 获取到数据格式化路由 根据后台返回的字段具体配置就好
         //     const routers = formatRouter(res);
         //     commit("SETROUTERS",userInfo: {} routers);
         //     resolve(routers);
@@ -73,7 +72,7 @@ const user = {
         //     reject();
         //   });
         const routers = formatRouter(asyncRouterMap); // 过滤
-        commit("SETROUTERS", { userInfo: {}, routers }); // 本地调试用
+        commit("SETROUTERS", { userInfo: {}, routers }); // 本地调试
         resolve(routers);
       });
     },

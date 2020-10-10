@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "welcome",
+  name: "home",
   components: {},
   created() {}
 };

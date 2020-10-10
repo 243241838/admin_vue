@@ -34,11 +34,11 @@ const routes = [
     component: () => import("@/views/layout"),
     children: [
       {
-        path: "/welcome",
-        name: "welcome",
-        component: () => import("@/views/welcome"),
+        path: "/home",
+        name: "home",
+        component: () => import("@/views/home"),
         meta: {
-          title: "welcome"
+          title: "首页"
         },
       },
     ],
