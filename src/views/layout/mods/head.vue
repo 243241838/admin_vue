@@ -12,7 +12,7 @@
     </ul>
     <div class="right item_flex right flex flex_right">
       <ul class="flex flex_align">
-        <li><img src="~@/assets/images/logo.png" alt=""></li>
+        <li><img src="~@/assets/logo.png" alt=""></li>
         <li>
           <el-dropdown>
             <span class="el-dropdown-link">
