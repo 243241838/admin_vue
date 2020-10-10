@@ -1,6 +1,6 @@
 <template>
   <el-aside class="flex flex_column" :class="{'isCollapse': isCollapse}">
-    <div class="logo flex flex_align justify_c"><img src="~@/assets/images/logo.png" alt=""></div>
+    <div class="logo flex flex_align justify_c"><img src="~@/assets/logo.png" alt=""></div>
     <menu-nav class="menu item_flex" />
   </el-aside>
 </template>
