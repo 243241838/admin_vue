@@ -5,6 +5,11 @@
       <template v-if="item.slotName">
         <slot :name="item.slotName"></slot>
       </template>
+      <el-table-column v-else-if="item.type == 'index'" :key="item.label" :prop="item.params" :type="item.type" :label="item.label" align="center" :width="item.width">
+        <template slot-scope="scope">
+          {{ scope.$index+1 +  (pageParams.pageIndex == 1 ? 0 : pageParams.pageIndex*pageParams.pageSize)}}
+        </template>
+      </el-table-column>
       <!-- 没有排序的 -->
       <el-table-column v-else-if="!item.sortable" :key="item.label" :prop="item.params" :type="item.type" :label="item.label" align="center" :width="item.width" />
       <el-table-column v-else :key="item.label" :prop="item.params" :type="item.type" :label="item.label" sortable="custom" align="center" :width="item.width" />
@@ -40,6 +45,16 @@ export default {
         return [];
       }
     },
+    // 分页参数
+    pageParams: {
+      type: Object,
+      default: () => {
+        return {
+          pageIndex: 1,
+          pageSize: this.GLOBAL.pageSize
+        };
+      }
+    },
     loading: {
       type: Boolean,
       default: false
@@ -67,6 +82,9 @@ export default {
   },
   data() {
     return {};
+  },
+  created() {
+    console.log(this.pageParams);
   },
   mounted() {},
   methods: {

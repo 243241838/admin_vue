@@ -18,7 +18,7 @@
     <el-button-group style="padding-bottom: 5px">
       <el-button @click="edit()" type="primary" size="small" icon="el-icon-plus">添加</el-button>
     </el-button-group>
-    <C-table class="item_flex" :tableParams="tableParams" :tableData="tableData" :loading="loading" :height="'100%'" :multipleSelection.sync="multipleSelection" :sort.sync="params.sort" :order.sync="params.order" @callBack="val=> getList(val)">
+    <C-table class="item_flex" :tableParams="tableParams" :tableData="tableData" :pageParams="{pageIndex: params.pageIndex, pageSize: params.pageSize}" :loading="loading" :height="'100%'" :multipleSelection.sync="multipleSelection" :sort.sync="params.sort" :order.sync="params.order" @callBack="val=> getList(val)">
       <!-- 特殊需要过滤的 -->
       <el-table-column slot="status" label="转态" align="center" prop="status" width="200">
         <template slot-scope="scope">
@@ -88,104 +88,6 @@ export default {
           id: 3,
           address: "上海市普陀区金沙江路 1519 弄",
           status: 3
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          id: 4,
-          address: "上海市普陀区金沙江路 1516 弄",
-          status: 1
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          id: 1,
-          address: "上海市普陀区金沙江路 1518 弄",
-          status: 1
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          id: 2,
-          address: "上海市普陀区金沙江路 1517 弄",
-          status: 2
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          id: 3,
-          address: "上海市普陀区金沙江路 1519 弄",
-          status: 3
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          id: 4,
-          address: "上海市普陀区金沙江路 1516 弄",
-          status: 1
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          id: 2,
-          address: "上海市普陀区金沙江路 1517 弄",
-          status: 2
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          id: 3,
-          address: "上海市普陀区金沙江路 1519 弄",
-          status: 3
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          id: 4,
-          address: "上海市普陀区金沙江路 1516 弄",
-          status: 1
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          id: 2,
-          address: "上海市普陀区金沙江路 1517 弄",
-          status: 2
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          id: 3,
-          address: "上海市普陀区金沙江路 1519 弄",
-          status: 3
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          id: 4,
-          address: "上海市普陀区金沙江路 1516 弄",
-          status: 1
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          id: 2,
-          address: "上海市普陀区金沙江路 1517 弄",
-          status: 2
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          id: 3,
-          address: "上海市普陀区金沙江路 1519 弄",
-          status: 3
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          id: 4,
-          address: "上海市普陀区金沙江路 1516 弄",
-          status: 1
         }
       ],
       status: [
