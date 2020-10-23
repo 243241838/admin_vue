@@ -1,5 +1,19 @@
 // elementui table样式重置
-.el-table td,
 .el-table th {
-  padding: 5px !important;
+  padding: 2px !important;
+}
+
+.el-table .el-table__header th {
+  background: #f8f8f8;
+  .cell {
+    line-height: 34px !important;
+  }
+}
+
+.el-table td {
+  padding: 3px !important;
+
+  .cell {
+    line-height: 14px !important;
+  }
 }

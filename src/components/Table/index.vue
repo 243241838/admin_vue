@@ -7,7 +7,7 @@
       </template>
       <el-table-column v-else-if="item.type == 'index'" :key="item.label" :prop="item.params" :type="item.type" :label="item.label" align="center" :width="item.width">
         <template slot-scope="scope">
-          {{ scope.$index+1 +  (pageParams.pageIndex == 1 ? 0 : pageParams.pageIndex*pageParams.pageSize)}}
+          {{ scope.$index+1 +  (pageParams.pageIndex == 1 ? 0 : (pageParams.pageIndex-1)*pageParams.pageSize)}}
         </template>
       </el-table-column>
       <!-- 没有排序的 -->
