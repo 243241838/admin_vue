@@ -83,9 +83,7 @@ export default {
   data() {
     return {};
   },
-  created() {
-    console.log(this.pageParams);
-  },
+  created() {},
   mounted() {},
   methods: {
     handleSelectionChange(val) {

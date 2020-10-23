@@ -6,6 +6,7 @@ const getters = {
   cachedViews: (state) => state.tagsView.cachedViews,
   routers: state => state.user.routers,
   menus: state => state.user.menus,
-  isCollapse: state=> state.isCollapse
+  isCollapse: state=> state.isCollapse,
+  isGetRouters: state => state.user.isGetRouters
 };
 export default getters;

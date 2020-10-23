@@ -8,11 +8,13 @@ function formatRouter(routers, level = 1) {
     let data = {
       path: item.path,
       name: item.path.replace(/\//g, "") + parseInt(Math.random() * 100000),
-      component: () => import("@/views/layout"),
+      component: level == 1 ? () => import("@/views/" + item.component) : "",
       title: item.meta.title,
       icon: item.meta.icon,
+      hidden: item.hidden,
       meta: {
         title: item.meta.title,
+        component: item.component,
         icon: item.meta.icon,
         isRegister: true, //是否需要注册
       },
@@ -33,6 +35,7 @@ const user = {
     userInfo: {}, // 用户资料
     routers: [], // 动态路由
     menus: [], // 菜单
+    isGetRouters: false,
   },
   mutations: {
     // 设置菜单
@@ -41,21 +44,9 @@ const user = {
       state.userInfo = {
         name: "超级管理员",
       };
+      state.isGetRouters = true
       state.routers = routers;
-      state.menus = [
-        {
-          path: "/home",
-          name: "home",
-          title: "首页",
-          icon: "el-icon-location",
-          meta: {
-            title: "首页",
-            icon: "el-icon-location",
-          },
-          children: [],
-        },
-        ...routers,
-      ];
+      state.menus = [...routers];
     },
   },
   actions: {
