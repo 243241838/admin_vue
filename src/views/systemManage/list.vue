@@ -59,14 +59,12 @@ export default {
       },
       total: 100,
       tableParams: [
-        { label: "复选框", params: "", width: "80", type: "selection" },
-        { label: "序号", params: "", width: "80", type: "index" },
         { label: "日期", params: "date", width: "120", sortable: true },
         { label: "姓名", params: "name", width: "120" },
         { label: "地址", params: "address", width: "" },
         { label: "状态", params: "status", width: 200, slotName: "status" }
       ],
-      multipleSelection: [],
+      multipleSelection: null,
       tableData: [
         {
           date: "2016-05-02",

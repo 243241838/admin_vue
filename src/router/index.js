@@ -1,6 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
+//获取原型对象上的push函数
+const originalPush = VueRouter.prototype.push
+//修改原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(VueRouter);
 // 自动化导入模块
 const modulesFiles = require.context("./modules", true, /\.js$/); // 读取文件的路径 是否遍历文件的子目录 匹配文件的正则

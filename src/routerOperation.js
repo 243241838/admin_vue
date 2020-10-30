@@ -14,7 +14,7 @@ router.beforeEach((to, from, next) => {
       return;
     }
     // 判断是否有路由权限
-    if (store.getters.routers && store.getters.routers.length == 0) {
+    if (store.getters.routers && store.getters.routers.length == 0 && !store.getters.isGetRouters) {
       store
         .dispatch("getPermission")
         .then((routers) => {

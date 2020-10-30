@@ -1,15 +1,18 @@
 <template>
   <el-table :data="tableData" v-loading="loading" border highlight-current-row stripe fit @selection-change="handleSelectionChange" @sort-change="sortChange" :height="height">
+    <!-- 复选框 -->
+    <el-table-column v-if="multipleSelection" type="selection" align="center" width="55" />
+    <!-- 序号 -->
+    <el-table-column v-if="isIndex" label="序号" align="center" width="70">
+      <template slot-scope="scope">
+        {{ scope.$index+1 +  (pageParams.pageIndex == 1 ? 0 : (pageParams.pageIndex-1)*pageParams.pageSize)}}
+      </template>
+    </el-table-column>
     <template v-for="item in tableParams">
       <!-- 需要特殊过滤的 -->
       <template v-if="item.slotName">
         <slot :name="item.slotName"></slot>
       </template>
-      <el-table-column v-else-if="item.type == 'index'" :key="item.label" :prop="item.params" :type="item.type" :label="item.label" align="center" :width="item.width">
-        <template slot-scope="scope">
-          {{ scope.$index+1 +  (pageParams.pageIndex == 1 ? 0 : pageParams.pageIndex*pageParams.pageSize)}}
-        </template>
-      </el-table-column>
       <!-- 没有排序的 -->
       <el-table-column v-else-if="!item.sortable" :key="item.label" :prop="item.params" :type="item.type" :label="item.label" align="center" :width="item.width" />
       <el-table-column v-else :key="item.label" :prop="item.params" :type="item.type" :label="item.label" sortable="custom" align="center" :width="item.width" />
@@ -67,6 +70,11 @@ export default {
       // 多选 可不传
       type: Array,
       default: () => []
+    },
+    isIndex: {
+      // 默认显示 传false不显示
+      type: Boolean,
+      default: true
     },
     // 以下用不到， 父页面就不需要设置
     sort: {

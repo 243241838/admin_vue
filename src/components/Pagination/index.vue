@@ -26,7 +26,6 @@ export default {
   mounted() {},
   methods: {
     handleSizeChange(val) {
-      console.log('dsa')
       this.$emit('update:size', val) // 赋值size
       this.$emit('update:page', 1) // 分页置为1
       this.$emit('getData')

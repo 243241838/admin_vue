@@ -2,15 +2,22 @@
 const systemManage = {
   path: '/systemManage',
   name: 'systemManage',
-  component: () => import("@/views/layout"),
-  meta: { title: '系统管理', icon: 'el-icon-setting' },
+  hidden: false,
+  redirect: "/systemManage/user",
+  component: "layout",
+  meta: {
+    title: "系统管理",
+    noCache: false,
+    icon: "edit"
+  },
   children: [
     {
       path: 'list',
       name: 'list',
+      component: "systemManage/list",
       meta: {
         title: '系统管理列表',
-        component: 'systemManage/list'
+        noCache: false
       }
     }
   ]

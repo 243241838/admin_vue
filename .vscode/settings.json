@@ -47,7 +47,7 @@
   },
   "files.autoSave": "off",
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[css]": {
     "editor.defaultFormatter": "HookyQR.beautify"
