@@ -21,6 +21,17 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 }, {});
 const routes = [
   {
+    path: '/redirect',
+    component: () => import("@/views/layout"),
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import("@/views/redirect")
+      }
+    ]
+  },
+  {
     path: "/login",
     name: "login",
     component: () => import("@/views/login"),

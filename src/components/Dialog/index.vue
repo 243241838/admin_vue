@@ -31,7 +31,7 @@ export default {
     },
     isEdit: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data() {
