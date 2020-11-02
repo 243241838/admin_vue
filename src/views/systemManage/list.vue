@@ -102,8 +102,7 @@ export default {
     };
   },
   created() {},
-  mounted() {
-  },
+  mounted() {},
   methods: {
     getList(status) {
       if (status) {
@@ -121,8 +120,8 @@ export default {
           console.log(err);
         });
     },
-    rowClick (row) {
-      console.log(row)
+    rowClick(row) {
+      console.log(row);
     },
     // 编辑 查看 新增
     edit(row, status) {

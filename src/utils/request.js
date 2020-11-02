@@ -55,6 +55,7 @@ service.interceptors.response.use(
         Message({
           message: res.msg,
           type: "error",
+          customClass: 'messageCustom',
           duration: 3500,
         });
         // code不是200返回 错误， 走catch
