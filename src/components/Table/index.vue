@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" v-loading="loading" border highlight-current-row stripe fit @selection-change="handleSelectionChange" @sort-change="sortChange" :height="height">
+  <el-table ref="tableList" :data="tableData" v-loading="loading" border highlight-current-row stripe fit @row-click="rowClick" @selection-change="handleSelectionChange" @sort-change="sortChange" :height="height">
     <!-- 复选框 -->
     <el-table-column v-if="multipleSelection" type="selection" align="center" width="55" />
     <!-- 序号 -->
@@ -91,9 +91,7 @@ export default {
   data() {
     return {};
   },
-  created() {
-    console.log(this.pageParams);
-  },
+  created() {},
   mounted() {},
   methods: {
     handleSelectionChange(val) {
@@ -111,7 +109,10 @@ export default {
         this.$emit("update:order", "");
       }
       this.$emit("callBack", 1); // 重新请求
-    }
+    },
+    rowClick(row, column, event) {
+      this.$emit('rowClick', row)
+    },
   }
 };
 </script>

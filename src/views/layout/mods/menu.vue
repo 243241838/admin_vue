@@ -52,9 +52,7 @@ export default {
   computed: {
     ...mapGetters(["menus", "isCollapse"])
   },
-  created() {
-    console.log(this.menus)
-  },
+  created() {},
   methods: {}
 };
 </script>

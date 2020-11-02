@@ -18,7 +18,7 @@
     <el-button-group style="padding-bottom: 5px">
       <el-button @click="edit()" type="primary" size="small" icon="el-icon-plus">添加</el-button>
     </el-button-group>
-    <C-table class="item_flex" :tableParams="tableParams" :tableData="tableData" :pageParams="{pageIndex: params.pageIndex, pageSize: params.pageSize}" :loading="loading" :height="'100%'" :multipleSelection.sync="multipleSelection" :sort.sync="params.sort" :order.sync="params.order" @callBack="val=> getList(val)">
+    <C-table ref="selectABLE" class="item_flex" :tableParams="tableParams" :tableData="tableData" :pageParams="{pageIndex: params.pageIndex, pageSize: params.pageSize}" :loading="loading" :height="'100%'" :multipleSelection.sync="multipleSelection" :sort.sync="params.sort" :order.sync="params.order" @callBack="val=> getList(val)" @rowClick="rowClick">
       <!-- 特殊需要过滤的 -->
       <el-table-column slot="status" label="转态" align="center" prop="status" width="200">
         <template slot-scope="scope">
@@ -28,9 +28,9 @@
       <!-- 操作 -->
       <el-table-column slot="operation" fixed="right" label="操作" align="center" width="200">
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" type="text" size="small">查看</el-button>
-          <el-button @click="edit(scope.row, 1)" type="text" size="small">编辑</el-button>
-          <el-button @click="deleData(scope.row)" type="text" size="small">删除</el-button>
+          <el-button @click.stop="edit(scope.row)" type="text" size="small">查看</el-button>
+          <el-button @click.stop="edit(scope.row, 1)" type="text" size="small">编辑</el-button>
+          <el-button @click.stop="deleData(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </C-table>
@@ -103,11 +103,9 @@ export default {
   },
   created() {},
   mounted() {
-    // this.getList();
   },
   methods: {
     getList(status) {
-      console.log(this.params);
       if (status) {
         this.params.pageIndex = 1;
       }
@@ -122,6 +120,9 @@ export default {
           this.loading = false;
           console.log(err);
         });
+    },
+    rowClick (row) {
+      console.log(row)
     },
     // 编辑 查看 新增
     edit(row, status) {
