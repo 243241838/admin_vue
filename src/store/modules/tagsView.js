@@ -40,13 +40,38 @@ const user = {
     },
     // 删除缓存数据
     DEL_CACHED_VIEW: (state, view) => {
-      for (const i of state.cachedViews) {
-        if (i === view.name) {
-          const index = state.cachedViews.indexOf(i);
-          state.cachedViews.splice(index, 1);
-          break;
-        }
+      const index = state.cachedViews.indexOf(view.name)
+      index > -1 && state.cachedViews.splice(index, 1)
+      // for (const i of state.cachedViews) {
+      //   if (i === view.name) {
+      //     const index = state.cachedViews.indexOf(i);
+      //     state.cachedViews.splice(index, 1);
+      //     break;
+      //   }
+      // }
+    },
+    DEL_OTHERS_VISITED_VIEWS: (state, view) => {
+      state.visitedViews = state.visitedViews.filter(v => {
+        return v.path == '/home' || v.path === view.path
+      })
+    },
+    DEL_OTHERS_CACHED_VIEWS: (state, view) => {
+      const index = state.cachedViews.indexOf(view.name)
+      if (index > -1) {
+        let cachedViews = state.cachedViews.slice(index, index + 1)
+        state.cachedViews = state.cachedViews.filter(v => {
+          return v == 'home' || v == cachedViews[0]
+        })
+      } else {
+        state.cachedViews = []
       }
+    },
+    DEL_ALL_VISITED_VIEWS: state => {
+      const affixTags = state.visitedViews.filter(tag => tag.path == '/home')
+      state.visitedViews = affixTags
+    },
+    DEL_ALL_CACHED_VIEWS: state => {
+      state.cachedViews = ['home']
     },
   },
   actions: {
@@ -84,6 +109,50 @@ const user = {
         commit("DEL_CACHED_VIEW", view);
         resolve([...state.cachedViews]);
       });
+    },
+    delOthersViews({ dispatch, state }, view) {
+      return new Promise(resolve => {
+        dispatch('delOthersVisitedViews', view)
+        dispatch('delOthersCachedViews', view)
+        resolve({
+          visitedViews: [...state.visitedViews],
+          cachedViews: [...state.cachedViews]
+        })
+      })
+    },
+    delOthersVisitedViews({ commit, state }, view) {
+      return new Promise(resolve => {
+        commit('DEL_OTHERS_VISITED_VIEWS', view)
+        resolve([...state.visitedViews])
+      })
+    },
+    delOthersCachedViews({ commit, state }, view) {
+      return new Promise(resolve => {
+        commit('DEL_OTHERS_CACHED_VIEWS', view)
+        resolve([...state.cachedViews])
+      })
+    },
+    delAllViews({ dispatch, state }, view) {
+      return new Promise(resolve => {
+        dispatch('delAllVisitedViews', view)
+        dispatch('delAllCachedViews', view)
+        resolve({
+          visitedViews: [...state.visitedViews],
+          cachedViews: [...state.cachedViews]
+        })
+      })
+    },
+    delAllVisitedViews({ commit, state }) {
+      return new Promise(resolve => {
+        commit('DEL_ALL_VISITED_VIEWS')
+        resolve([...state.visitedViews])
+      })
+    },
+    delAllCachedViews({ commit, state }) {
+      return new Promise(resolve => {
+        commit('DEL_ALL_CACHED_VIEWS')
+        resolve([...state.cachedViews])
+      })
     },
   },
 };

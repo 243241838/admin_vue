@@ -1,5 +1,13 @@
 <template>
-  <el-table :data="tableData" v-loading="loading" border highlight-current-row stripe fit @selection-change="handleSelectionChange" @sort-change="sortChange" :height="height">
+  <el-table ref="tableList" :data="tableData" v-loading="loading" border highlight-current-row stripe fit @row-click="rowClick" @selection-change="handleSelectionChange" @sort-change="sortChange" :height="height">
+    <!-- 复选框 -->
+    <el-table-column v-if="multipleSelection" type="selection" align="center" width="55" />
+    <!-- 序号 -->
+    <el-table-column v-if="isIndex" label="序号" align="center" width="70">
+      <template slot-scope="scope">
+        {{ scope.$index+1 +  (pageParams.pageIndex == 1 ? 0 : (pageParams.pageIndex-1)*pageParams.pageSize)}}
+      </template>
+    </el-table-column>
     <template v-for="item in tableParams">
       <!-- 需要特殊过滤的 -->
       <template v-if="item.slotName">
@@ -68,6 +76,11 @@ export default {
       type: Array,
       default: () => []
     },
+    isIndex: {
+      // 默认显示 传false不显示
+      type: Boolean,
+      default: true
+    },
     // 以下用不到， 父页面就不需要设置
     sort: {
       // 排序的方式
@@ -101,7 +114,10 @@ export default {
         this.$emit("update:order", "");
       }
       this.$emit("callBack", 1); // 重新请求
-    }
+    },
+    rowClick(row, column, event) {
+      this.$emit('rowClick', row)
+    },
   }
 };
 </script>

@@ -16,6 +16,7 @@ function formatRouter(routers, level = 1) {
         title: item.meta.title,
         component: item.component,
         icon: item.meta.icon,
+        noCache: item.meta.noCache,
         isRegister: true, //是否需要注册
       },
       children:
@@ -39,7 +40,7 @@ const user = {
   },
   mutations: {
     // 设置菜单
-    SETROUTERS: (state, { userInfo, routers }) => {
+    SETROUTERS: (state, { userInfo, routers, btnList }) => {
       state.userInfo = userInfo;
       state.userInfo = {
         name: "超级管理员",
@@ -63,7 +64,8 @@ const user = {
         //     reject();
         //   });
         const routers = formatRouter(asyncRouterMap); // 过滤
-        commit("SETROUTERS", { userInfo: {}, routers }); // 本地调试
+        const btnList = ['user:query']
+        commit("SETROUTERS", { userInfo: {}, routers, btnList }); // 本地调试
         resolve(routers);
       });
     },

@@ -4,6 +4,9 @@
   height: 100%;
   overflow-y: auto;
 }
+.messageCustom {
+  z-index: 9999!important;
+}
 //弹性盒
 .flex {
   display: flex;

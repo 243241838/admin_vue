@@ -13,7 +13,7 @@
 import Vue from "vue";
 import { mapGetters } from "vuex";
 const _import = file => () =>
-  import(/* webpackChunkName: `[request][index]` */ `@/views${file}`); //动态设置chunkName打包
+  import(/* webpackChunkName: `[request][index]` */ `@/views/${file}`); //动态设置chunkName打包
 export default {
   name: "cMain",
   data: () => {
@@ -46,7 +46,7 @@ export default {
         this.componentName = name;
         return false;
       }
-      let async = _import(this.$route.path);
+      let async = _import(this.$route.meta.component);
       async().then(
         com => {
           Vue.component(name, com.default);
